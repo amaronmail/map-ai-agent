@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <meta name="theme-color" content="#2196F3" />
+
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="apple-mobile-web-app-title" content="askamar" />
+
+  <meta name="description" content="askamar - AI Agent for smart route planning" />
+
+  <title>askamar - AI Agent</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="style-mobile.css" />
+
+  <script>
+    window.API_BASE_URL = "";
+  </script>
+
+  <link rel="manifest" href="manifest.json" />
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="top-header">
+
+  <h1>
+    🚗 askamar
+    <span>AI Agent</span>
+  </h1>
+
+  <div class="search-box">
+
+    <input id="fromInput" placeholder="Start Location (Delhi)" />
+
+    <button class="swap-btn" onclick="swapLocations()">⇄</button>
+
+    <input id="toInput" placeholder="End Location (Mumbai)" />
+
+    <button onclick="runAI()">Search</button>
+
+    <button id="resetBtn" onclick="resetForm()">Reset</button>
+
+  </div>
+
+</div>
+
+<!-- RESULT -->
+<div id="result"></div>
+
+<!-- IMPORTANT -->
+<div id="servicesBox" class="services-box"></div>
+
+<!-- MAP -->
+<div id="map"></div>
+
+<!-- SCRIPTS (IMPORTANT FIX) -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- 🔴 FIX: defer execution safety -->
+<script src="app.js" defer></script>
+
+<!-- PWA -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
+    try {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const registration of registrations) {
+        await registration.unregister();
+      }
+    } catch (err) {
+      console.warn('Service Worker cleanup failed:', err);
+    }
+
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((registration) => {
+        console.log("Service Worker registered:", registration);
+      })
+      .catch((error) => {
+        console.error("Service Worker registration failed:", error);
+      });
+  });
+}
+</script>
+
+</body>
+</html>

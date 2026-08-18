@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Map AI Agent</string>
+    <string name="title_activity_main">Map AI Agent</string>
+    <string name="package_name">com.mapai.agent</string>
+    <string name="custom_url_scheme">com.mapai.agent</string>
+</resources>

@@ -1,0 +1,383 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+/* =========================
+   MAP
+========================= */
+#map {
+  position: absolute;
+  top: 100px;   /* space for search bar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: calc(100vh - 100px);
+}
+
+/* =========================
+   DASHBOARD PANEL
+========================= */
+.dashboard {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 380px;
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  z-index: 1000;
+
+  padding-right: 5px;
+}
+
+/* Scrollbar */
+.dashboard::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+}
+
+/* =========================
+   INFO CARDS (GLASS STYLE)
+========================= */
+.info-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+
+  margin-bottom: 15px;
+
+  border-radius: 16px;
+
+  padding: 16px 18px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Hover effect */
+.info-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   CARD TITLE
+========================= */
+.info-card h2 {
+  font-size: 18px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   ROWS
+========================= */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 8px 0;
+
+  border-bottom: 1px solid #eee;
+
+  font-size: 14px;
+  color: #444;
+}
+
+/* last row no border */
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.positive-change {
+  color: #1f8c4b;
+  font-weight: 600;
+}
+
+.negative-change {
+  color: #c0392b;
+  font-weight: 600;
+}
+
+/* =========================
+   EXPAND / COLLAPSE
+========================= */
+.card-content {
+  max-height: 0;
+  overflow: hidden;
+
+  transition: max-height 0.4s ease;
+}
+
+/* when active (clicked) */
+.info-card.active .card-content {
+  max-height: 500px;
+}
+
+/* =========================
+   HEADER CARD (ROUTE TITLE)
+========================= */
+.info-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .dashboard {
+    width: 90%;
+    right: 5%;
+    top: 10px;
+  }
+}
+
+<style>
+/* =========================
+   TOP HEADER CENTER UI
+========================= */
+
+.top-header {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+
+  text-align: center;
+}
+
+/* TITLE */
+.top-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* USER TAG */
+.top-header h1 span {
+  font-size: 16px;
+  color: gray;
+}
+
+/* SEARCH BOX */
+.search-box {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* INPUT */
+.search-box input {
+  width: 350px;
+  padding: 14px;
+  font-size: 16px;
+
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+}
+
+/* BUTTON */
+.search-box button {
+  padding: 14px 22px;
+  font-size: 16px;
+
+  background: #007bff;
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #0056b3;
+}
+</style>
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* MAP FULL SCREEN */
+#map {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* HEADER (Google Maps style) */
+.top-header {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    max-height: 55vh;
+
+    border-radius: 20px 20px 0 0;
+
+    overflow-y: auto;
+
+    background: white;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+  }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#map {
+  position: absolute;
+  top: 50px;   /* below search bar */
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box input {
+  padding: 12px;
+  width: 200px;
+}
+
+.search-box button {
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+.swap-btn {
+  padding: 10px 12px;
+  font-size: 18px;
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.swap-btn:hover {
+  background: #f0f0f0;
+  transform: rotate(180deg);
+}
+
+/* RESET BUTTON - POSITIONED AT EXTREME RIGHT */
+#resetBtn {
+  margin-left: auto;
+  background: #6c757d !important;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#resetBtn:hover {
+  background: #5a6268 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#resetBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* FUEL PRICE INPUT & UPDATE BUTTON */
+#fuelPriceInput {
+  transition: all 0.2s ease;
+}
+
+#fuelPriceInput:focus {
+  border-color: #007bff !important;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+#updateFuelPriceBtn {
+  transition: all 0.2s ease;
+}
+
+#updateFuelPriceBtn:hover {
+  background: #0056b3 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+#updateFuelPriceBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+#servicesBox{
+  background:#fff;
+  padding:15px;
+  margin:10px;
+  border-radius:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  z-index:999;
+  position:relative;
+}
+
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
+}
+
+#map{
+  width:100%;
+  height:70vh;
+}

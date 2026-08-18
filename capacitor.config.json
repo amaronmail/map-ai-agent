@@ -1,0 +1,9 @@
+{
+  "appId": "com.mapai.agent",
+  "appName": "Map AI Agent",
+  "webDir": "client",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": ""
+  }
+}
