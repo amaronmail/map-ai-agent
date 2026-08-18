@@ -279,27 +279,11 @@ app.get("/api/market-data", async (req, res) => {
 
 // ================= START SERVER =================
 
+const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "0.0.0.0";
-const DEFAULT_PORT = Number(process.env.PORT) || 3000;
 
-function startServer(port) {
-  const server = app.listen(port, HOST, () => {
-    const hostLabel = HOST === "0.0.0.0" ? "all network interfaces" : HOST;
-    console.log(`Server running on http://${hostLabel}:${port}`);
-    console.log("Use this app from any device on the same network via the server's IP address.");
-  });
-
-  server.on("error", (err) => {
-    if (err.code === "EADDRINUSE" && !process.env.PORT && port === DEFAULT_PORT) {
-      const fallbackPort = port + 1;
-      console.warn(`Port ${port} is busy; retrying on ${fallbackPort}...`);
-      startServer(fallbackPort);
-      return;
-    }
-
-    console.error("Failed to start server:", err.message);
-    process.exit(1);
-  });
-}
-
-startServer(DEFAULT_PORT);
+app.listen(PORT, HOST, () => {
+  const hostLabel = HOST === "0.0.0.0" ? "all network interfaces" : HOST;
+  console.log(`Server running on http://${hostLabel}:${PORT}`);
+  console.log("Use this app from any device on the same network via the server's IP address.");
+});

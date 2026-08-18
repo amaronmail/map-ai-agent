@@ -520,7 +520,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
       `;
-      
 
       // ================= ROUTE =================
       if (routeLine) map.removeLayer(routeLine);
